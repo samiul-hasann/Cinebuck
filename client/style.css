@@ -1,0 +1,597 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  -webkit-tap-highlight-color: transparent; /* Remove blue box on tap */
+}
+
+
+
+.arrow img {
+  width: 5vmin;
+  height: 5vmin;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 3%;
+  width: 97%;
+  padding: 0 0 1% 1%;
+}
+
+/* Hero Banner */
+.hero-container {
+  position: relative;
+  width: 100%;
+  padding-top: 42%; /* This creates a responsive container with a 40% height based on the width */
+  overflow: hidden;
+}
+
+.hero-banner {
+    background: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%), linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 15%), linear-gradient(to left, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 15%), var(--bg-image) center top/cover no-repeat;
+  height: 100%;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute; /* Position banners absolutely within the container */
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s cubic-bezier(0.42, 0, 0.58, 1);
+  transform: scale(1);
+}
+
+.hero-banner.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.hero-banner.zoomed {
+  transform: scale(1.05);
+  transition: transform 5s ease-out;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.2s ease-in-out;
+}
+
+.arrow:hover {
+  transform: translateY(-50%) scale(1.25);
+}
+
+@keyframes blink-effect {
+  50% {
+    transform: translateY(-50%) scale(1.4);
+    opacity: 0.5;
+  }
+}
+
+.blink {
+  animation: blink-effect 0.2s ease-in-out;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+.hero-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 40px 40px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero-banner h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hero-banner p {
+  font-size: 16px;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.hero-banner .buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.play-btn, .trailer-btn {
+  padding: 15px 30px;
+  border: none;
+  background-color: red;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  animation: pulse-play-button 2s infinite alternate; /* Apply the animation */
+}
+
+.trailer-btn {
+  background-color: #555;
+}
+
+.hero-banner .rating, .hero-banner .stream {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.stream-highlight {
+  font-weight: bold;
+  color: red;
+}
+
+
+/* Section Title */
+.section {
+  margin-top: 40px;
+}
+
+@media (max-width: 480px) {
+    .tv-web-series-card, .most-popular-card {
+        flex: 1 1 100%; /* 1 card per row on very small screens */
+        max-width: 100%;
+    }
+}
+
+.touch-ripple {
+  position: fixed;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none; /* Allow clicks to pass through */
+  z-index: 9999; /* Ensure it's on top */
+  display: none; /* Hidden by default */
+}
+
+.main-ripple {
+  background-color: rgba(255, 255, 255, 0.4); /* Slightly transparent white */
+  animation: water-drop-main 0.8s ease-out forwards;
+}
+
+.inner-ripple {
+  background-color: rgba(200, 200, 255, 0.6); /* Bluish tint for inner splash */
+  animation: water-drop-inner 0.5s ease-out forwards;
+}
+
+@keyframes water-drop-main {
+  to {
+    transform: scale(1.2); /* Expands more */
+    opacity: 0;
+  }
+}
+
+@keyframes water-drop-inner {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+
+
+.section h2 {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.card-row-container {
+  position: relative;
+}
+
+.new-this-week-arrow {
+  position: absolute;
+  top: 45%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Card Row (for horizontal lists) */
+.card-row {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  overflow-y: visible; /* Allow vertical overflow */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For IE and Edge */
+  padding: 20px 20px; /* Add vertical padding for zoom space */
+}
+
+.card-row::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.new-this-week-text {
+  color: white;
+}
+
+.card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+.card-row .card img {
+  width: 240px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+
+/* Card Grid (for vertical blocks) */
+.category-grid-wrapper {
+  overflow: visible;
+  position: relative;
+}
+
+.category-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  padding: 20px 20px; /* Added top, bottom, left, and right padding for zoom space */
+  overflow-x: auto;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For IE and Edge */
+}
+
+.category-grid::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.category-image {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.category-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.category-card:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  z-index: 10;
+}
+
+.category-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.card-grid .card {
+  text-align: center;
+}
+
+.card-grid .card p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* "See All" button */
+.see-all {
+  float: right;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+
+.tv-web-series-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.tv-web-series-card {
+  flex: 1 1 calc(25% - 16px);
+  max-width: calc(25% - 16px);
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.tv-web-series-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+.tv-web-series-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+}
+
+.tv-web-series-card p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.tv-web-series-card a, .most-popular-card a {
+  text-decoration: none;
+}
+
+.most-popular-section .card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.most-popular-card {
+  flex: 1 1 calc(25% - 16px);
+  max-width: calc(25% - 16px);
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.most-popular-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+.most-popular-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+}
+
+.most-popular-card p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.categories-section {
+  margin-top: 40px;
+}
+
+.categories-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.category-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 11;
+}
+
+.tv-web-series-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.most-popular-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.mobile-divider {
+  display: none;
+}
+
+@keyframes pulse-play-button {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.9);
+  }
+}
+
+@keyframes animate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .touch-ripple {
+        display: block; /* Show on mobile */
+    }
+
+    /* Hero Banner Adjustments */
+    .hero-container {
+        height: 60vh; /* Increased height for mobile hero section */
+        background-position: center; /* Ensure background image is centered */
+        background-size: cover; /* Ensure background image covers the container */
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: calc(100% + 30px); /* Account for 15px padding on each side of main-content */
+        margin-left: -15px; /* Pull left to counteract main-content padding */
+    }
+
+    .hero-banner .overlay {
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%); /* Stronger gradient for better text contrast */
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-banner h1 {
+        font-size: 2.8em; /* Larger font for impact */
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for readability */
+    }
+
+    .hero-banner p {
+        font-size: 1.1em; /* Slightly larger font for readability */
+        max-width: 90%; /* Adjust max-width for better text flow */
+        margin-bottom: 25px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Add text shadow for readability */
+    }
+
+    .hero-banner .buttons {
+        flex-direction: row; /* Keep buttons in a row for better mobile interaction */
+        flex-wrap: wrap; /* Allow buttons to wrap if needed */
+        justify-content: center; /* Center buttons */
+        gap: 15px; /* Increase space between buttons */
+    }
+
+    .play-btn, .trailer-btn {
+        padding: 12px 25px; /* Adjust padding for better touch targets */
+        font-size: 16px; /* Slightly larger font for buttons */
+        border-radius: 30px; /* More rounded buttons */
+        transition: background-color 0.3s ease, transform 0.2s ease; /* Add transitions */
+    }
+
+    .play-btn:hover, .trailer-btn:hover {
+        transform: scale(1.05); /* Add subtle hover effect */
+    }
+
+    .play-btn {
+        background-color: #e50914; /* Netflix red */
+    }
+
+    .trailer-btn {
+        background-color: rgba(100, 100, 100, 0.7); /* Darker, semi-transparent grey */
+        border: 1px solid #fff; /* White border for contrast */
+    }
+
+    .categories-section {
+        margin-bottom: 30px;
+    }
+
+    .mobile-divider {
+        display: block; /* Make it visible on mobile */
+        height: 10px; /* Example height */
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); /* Rainbow gradient */
+        background-size: 400% 100%; /* Make the gradient larger than the element */
+        margin: 20px 0; /* Some vertical spacing */
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); /* Glowing effect */
+        animation: animate-gradient 10s ease infinite; /* Apply the animation */
+    }
+
+    
+
+    /* Card and Grid Adjustments */
+    .section h2, .categories-title, .tv-web-series-section h2, .most-popular-section h2 {
+        font-size: 20px;
+        margin-bottom: 20px; /* Reverted to original gap for mobile UI */
+        margin-top: 20px;
+    }
+
+    .card-row, .category-grid {
+        padding: 0; /* Let main-content padding handle spacing */
+    }
+
+    .card-row .card img {
+        width: 150px;
+        height: 84px;
+    }
+
+    .category-image {
+        width: 120px;
+        height: 80px;
+    }
+
+    .tv-web-series-card-grid, .most-popular-section .card-grid {
+        gap: 10px;
+    }
+
+    .tv-web-series-card, .most-popular-card {
+        flex: 1 1 calc(50% - 10px); /* 2 cards per row */
+        max-width: calc(50% - 10px);
+    }
+
+    .tv-web-series-section h2 {
+        margin-bottom: 1px; /* Reduced gap for TV & WEB Series heading only */
+        
+    }
+
+    .new-this-week-arrow {
+        top: 35%;
+    }
+}

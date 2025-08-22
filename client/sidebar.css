@@ -1,0 +1,385 @@
+/* Sidebar Overlay */
+#sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+}
+
+#sidebar-overlay.visible {
+    display: block;
+}
+
+/* Desktop Sidebar */
+.sidebar {
+  width: 3%; /* Collapsed width */
+  background-color: #111;
+  padding: 0;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: width 0.3s ease; /* Smooth transition for width */
+}
+
+.sidebar.expanded {
+  width: 12%; /* Expanded width */
+}
+
+.sidebar.expanded .sidebar-icon {
+  justify-content: flex-start;
+  padding-left: 1vw; /* Align content to the left edge when expanded */
+}
+
+.sidebar-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.sidebar-icon a, .sidebar-icon > span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px; /* Space between icon and text */
+  text-decoration: none;
+  color: inherit; /* Ensure text color is inherited */
+  width: 100%; /* Make the link fill the width of the li */
+  padding: 0.52vw 0; /* Initial padding for collapsed state */
+  text-align: left;
+  box-sizing: border-box;
+  transition: padding 0.3s ease;
+}
+
+.sidebar-icon .icon-name {
+  display: none; /* Hidden by default */
+  white-space: nowrap; /* Prevent text wrapping */
+  font-size: 0.9375vw; /* Match icon size */
+  margin-right: 10px; /* Space between text and icon */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar.expanded .sidebar-icon .icon-name {
+  display: block; /* Show when expanded */
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vh;
+  align-items: flex-start;
+  padding-left: 0;
+  height: 100%; /* Ensure the ul takes full height */
+}
+
+.sidebar.expanded .sidebar nav ul {
+  align-items: flex-start; /* Align items to start when expanded */
+}
+
+.sidebar.expanded .sidebar-icon > a, .sidebar.expanded .sidebar-icon > span {
+  padding: 15px; /* Fixed padding for expanded state */
+}
+
+.sidebar-icon#menu-toggle-sidebar {
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+}
+
+.menu-icon-animated {
+  width: 18px;
+  height: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-icon-animated span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.menu-icon-animated span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-icon-animated span:nth-child(2) {
+  top: 6px;
+}
+
+.menu-icon-animated span:nth-child(3) {
+  top: 12px;
+}
+
+.sidebar.expanded .menu-icon-animated span:nth-child(1) {
+  top: 6px;
+  transform: rotate(135deg);
+}
+
+.sidebar.expanded .menu-icon-animated span:nth-child(2) {
+  opacity: 0;
+  left: -18px;
+}
+
+.sidebar.expanded .menu-icon-animated span:nth-child(3) {
+  top: 6px;
+  transform: rotate(-135deg);
+}
+
+.sidebar-icon a:hover i, .sidebar-icon span:hover i, .sidebar-icon a:hover {
+  color: red; /* Change icon and text color to red on hover */
+}
+
+.sidebar-icon.active a i, .sidebar-icon.active a {
+  color: red; /* Change icon and text color to red when active */
+}
+
+.sidebar-icon .active-bar {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background-color: red;
+  border-radius: 2px;
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.3s ease-in-out; /* Smooth transition */
+}
+
+.sidebar-icon.active .active-bar {
+  opacity: 1; /* Show when active */
+}
+
+.sidebar-icon.top-arrow {
+  font-size: 0.9375vw; /* Adjusted to scale with viewport width */
+  font-weight: bold;
+  margin-bottom: 1.04vw; /* Adjusted to scale with viewport width */
+}
+
+.app-logo-in-sidebar {
+  text-align: center;
+  width: 100%;
+  padding-left: 0;
+  box-sizing: border-box;
+  display: block;
+  justify-content: unset;
+  align-items: unset;
+}
+
+.sidebar.expanded .app-logo-in-sidebar {
+  text-align: left;
+  padding-left: 1vw; /* Match the padding of other items */
+}
+
+/* Mobile Header */
+.mobile-header {
+    display: none; /* Hidden by default */
+    background-color: #111;
+    color: #fff;
+    justify-content: space-between;
+    padding: 5px 15px; /* This controls the height */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 101;
+}
+
+.mobile-header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: red;
+}
+
+/* Mobile Sidebar */
+.mobile-sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: -200px; /* Off-screen by default */
+    background-color: #111;
+    padding-top: 60px; /* Space for the header */
+    transition: 0.3s;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mobile-sidebar.open {
+    left: 0;
+}
+
+.mobile-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-sidebar ul li a {
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    text-align: left;
+    opacity: 0; /* Initial state */
+    transform: translateX(-20px); /* Initial state */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Add transition for animation */
+}
+
+.mobile-sidebar ul li a:hover {
+    background-color: #555;
+}
+
+.mobile-sidebar.open ul li a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-sidebar .genre .genre-list {
+    display: none;
+    padding-left: 20px;
+}
+
+.mobile-sidebar .genre.open .genre-list {
+    display: block;
+}
+
+/* Main content adjustments */
+.main-content {
+  margin-left: 3%; /* Initial margin */
+  width: 97%;
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transition for margin and width */
+}
+
+.main-content.expanded {
+  margin-left: 12%; /* Adjusted margin when sidebar is expanded */
+  width: 88%; /* Adjusted width when sidebar is expanded */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Hide Desktop Sidebar */
+    .sidebar {
+        display: none;
+    }
+
+    /* Show Mobile Header */
+    .mobile-header {
+        display: flex;
+    }
+
+    /* Adjust Main Content for Mobile */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 50px 15px 15px 15px; /* Space for header + horizontal padding */
+    }
+
+    .main-content.expanded {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px; /* Adjust padding as needed */
+  background-color: #222; /* Darker background for search bar */
+  border-radius: 5px;
+  margin: 10px 0; /* Space above/below search bar */
+}
+
+.search-container input[type="text"] {
+  flex-grow: 1;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  outline: none;
+  font-size: 1em;
+}
+
+.search-container input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+.search-container button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container button:hover {
+  color: red;
+}
+
+/* Adjustments for desktop sidebar when expanded */
+.sidebar.expanded .search-container {
+  padding: 10px 15px;
+}
+
+.sidebar.expanded .search-container input[type="text"] {
+  font-size: 1em;
+}
+
+.sidebar.expanded .search-container button {
+  font-size: 1.2em;
+}
+
+/* Mobile sidebar specific adjustments */
+.mobile-sidebar .search-container {
+    margin: 10px 15px;
+    padding: 8px 10px;
+}
+
+.mobile-sidebar .search-container input[type="text"] {
+    font-size: 1em;
+}
+
+.mobile-sidebar .search-container button {
+    font-size: 1.2em;
+}
