@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../sidebar/sidebar.css">
+  <link rel="stylesheet" href="down.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-container"></div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="movie-details-container">
+      <div class="movie-poster">
+        <img src="../asset/image/poster/down/downchar.png" alt="The Lord of the Rings: The Rings of Power">
+      </div>
+      <div class="movie-info">
+        <h1>The Lord of the Rings: The Rings of Power</h1>
+        <p class="subtitle">"WEB-DL", "HDTC"</p>
+        <p class="tagline">Nothing is evil in the beginning.</p>
+        <p class="meta-info">2022 - Drama - 2 seasons 181 Min</p>
+        <div class="tags">
+          <span class="tag">Fantasy</span>
+          <span class="tag">Adventure</span>
+          <span class="tag">Sci-Fi</span>
+          <span class="tag">Drama</span>
+        </div>
+        <div class="stats">
+          <p>Duration: 128 min</p>
+          <p>Quality: HD, 2K</p>
+          <p>IMDB: 8.8</p>
+        </div>
+        <div class="watch-options">
+          <a href="#" id="watch-trailer-btn" class="watch-btn">Watch trailer</a>
+          <a href="#" id="watch-online-btn" class="watch-btn">Watch Online</a>
+          <a href="#" class="watch-btn secondary">Download</a>
+        </div>
+        <p class="description">
+          The Lord of the Rings: The Rings of Power is a fantasy television series set thousands of years before the events of The Hobbit and The Lord of the Rings. Inspired by the works of J.R.R. Tolkien, the show explores the rise of evil in Middle-earth during the Second Age, including the forging of the Rings of Power, the rise of Sauron, and the epic events that shape the world's future. Featuring new and familiar characters, the series blends sweeping visuals, rich lore, and high-stakes drama in an expansive, mythic setting.
+        </p>
+      </div>
+    </div>
+
+    <section class="top-cast-section">
+      <h2>Top cast</h2>
+      <div class="cast-grid">
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 16.png" alt="Regina Kuller">
+          <p class="cast-name">Regina Kuller</p>
+          <p class="cast-role">Galadriel</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 18.png" alt="Charlie Vickers">
+          <p class="cast-name">Charlie Vickers</p>
+          <p class="cast-role">Halbrand</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 19.png" alt="Ismael Cruz Córdova">
+          <p class="cast-name">Ismael Cruz Córdova</p>
+          <p class="cast-role">Arondir</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 20.png" alt="Nazanin Boniadi">
+          <p class="cast-name">Nazanin Boniadi</p>
+          <p class="cast-role">Bronwyn</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 21.png" alt="Tyroe Muhafidin">
+          <p class="cast-name">Tyroe Muhafidin</p>
+          <p class="cast-role">Theo</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 22.png" alt="Morfydd Clark">
+          <p class="cast-name">Morfydd Clark</p>
+          <p class="cast-role">Galadriel</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 126.png" alt="Robert Aramayo">
+          <p class="cast-name">Robert Aramayo</p>
+          <p class="cast-role">Elrond</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 127.png" alt="Owain Arthur">
+          <p class="cast-name">Owain Arthur</p>
+          <p class="cast-role">Durin IV</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 128.png" alt="Sophia Nomvete">
+          <p class="cast-name">Sophia Nomvete</p>
+          <p class="cast-role">Disa</p>
+        </div>
+        <div class="cast-member">
+          <img src="../asset/image/poster/index/Rectangle 129.png" alt="Cynthia Addai-Robinson">
+          <p class="cast-name">Cynthia Addai-Robinson</p>
+          <p class="cast-role">Miriel</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="video-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div id="local-player-container">
+        <video id="video-player" controls style="width:100%">
+            <source src="test.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+      </div>
+      <div id="youtube-player-container" style="display:none;">
+        <!-- Iframe will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../sidebar/sidebar.js"></script>
+  <script src="../sidebar/loader.js"></script>
+  <script src="down.js"></script>
+</body>
+</html>

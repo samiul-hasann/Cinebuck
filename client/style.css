@@ -595,3 +595,16 @@ body {
         top: 35%;
     }
 }
+
+/* Hero Banner Backgrounds */
+.hero-banner-1 {
+  --bg-image: url('asset/image/poster/index/peaky-blinders-hero.png');
+}
+
+.hero-banner-2 {
+  --bg-image: url('asset/image/poster/index/peaky-blinders-hero-2.png');
+}
+
+.hero-banner-3 {
+  --bg-image: url('asset/image/poster/index/house-of-dragon-blinders-hero.png');
+}
